@@ -17,9 +17,10 @@
             class="campo-busca"
           />
         </div>
-        <div class="grade-3">
+        <div v-if="servicosFiltrados.length" class="grade-3">
           <ServiceCard v-for="service in servicosFiltrados" :key="service.name" :service="service" />
         </div>
+        <p v-else class="mensagem-vazia">Nenhum serviço encontrado.</p>
       </div>
     </section>
   </div>
@@ -72,5 +73,11 @@ const servicosFiltrados = computed(() =>
 
 .campo-busca::placeholder {
   color: #666;
+}
+
+.mensagem-vazia {
+  text-align: center;
+  color: #c9a84c;
+  font-size: 1.05rem;
 }
 </style>
