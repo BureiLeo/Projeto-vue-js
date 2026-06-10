@@ -9,8 +9,16 @@
 
     <section class="secao">
       <div class="envolvente">
+        <div class="busca-servicos">
+          <input
+            v-model="searchQuery"
+            type="text"
+            placeholder="Buscar serviço..."
+            class="campo-busca"
+          />
+        </div>
         <div class="grade-3">
-          <ServiceCard v-for="service in servicos" :key="service.name" :service="service" />
+          <ServiceCard v-for="service in servicosFiltrados" :key="service.name" :service="service" />
         </div>
       </div>
     </section>
@@ -18,7 +26,10 @@
 </template>
 
 <script setup>
+import { ref, computed } from 'vue'
 import ServiceCard from '@/components/ServiceCard.vue'
+
+const searchQuery = ref('')
 
 const servicos = [
   { icon: '✂️', name: 'Corte Masculino', description: 'Corte personalizado com tesoura ou máquina.', price: '45,00', duration: '40 min' },
@@ -28,4 +39,38 @@ const servicos = [
   { icon: '🎨', name: 'Pigmentação', description: 'Pigmentação capilar para um visual jovem.', price: '80,00', duration: '60 min' },
   { icon: '💧', name: 'Hidratação', description: 'Tratamento hidratante profundo.', price: '55,00', duration: '45 min' },
 ]
+
+const servicosFiltrados = computed(() =>
+  servicos.filter(s =>
+    s.name.toLowerCase().includes(searchQuery.value.toLowerCase())
+  )
+)
 </script>
+
+<style scoped>
+.busca-servicos {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.campo-busca {
+  width: 100%;
+  max-width: 400px;
+  padding: 0.75rem 1rem;
+  border: 1px solid #333;
+  border-radius: 8px;
+  background: #1a1a1a;
+  color: #fff;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.campo-busca:focus {
+  border-color: #c9a84c;
+}
+
+.campo-busca::placeholder {
+  color: #666;
+}
+</style>
