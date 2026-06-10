@@ -33,7 +33,6 @@
       </div>
 
       <div class="linha-campos">
-        <!-- Serviço – usa v-for para popular o select -->
         <div class="grupo-campo">
           <label for="service">Serviço Desejado *</label>
           <select
@@ -49,7 +48,6 @@
           <span v-if="errors.service" class="erro-campo">{{ errors.service }}</span>
         </div>
 
-        <!-- Barbeiro – usa v-for para popular o select -->
         <div class="grupo-campo">
           <label for="barber">Barbeiro *</label>
           <select
@@ -67,7 +65,7 @@
       </div>
 
       <div class="linha-campos">
-        <!-- Data -->
+
         <div class="grupo-campo">
           <label for="date">Data *</label>
           <input
@@ -80,7 +78,6 @@
           <span v-if="errors.date" class="erro-campo">{{ errors.date }}</span>
         </div>
 
-        <!-- Horário – usa v-for para popular o select -->
         <div class="grupo-campo">
           <label for="time">Horário *</label>
           <select
@@ -97,7 +94,7 @@
         </div>
       </div>
 
-      <!-- Observações (campo opcional) -->
+ 
       <div class="grupo-campo">
         <label for="notes">Observações (opcional)</label>
         <textarea
@@ -174,7 +171,7 @@ function validate() {
 function handleSubmit() {
   if (!validate()) return
   isSubmitting.value = true
-  // Simula chamada assíncrona de 1 segundo
+
   setTimeout(() => {
     isSubmitting.value = false
     emit('success', { ...form.value })
@@ -187,4 +184,3 @@ function resetForm() {
   errors.value = {}
 }
 </script>
-
