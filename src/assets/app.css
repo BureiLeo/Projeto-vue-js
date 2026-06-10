@@ -1,0 +1,353 @@
+﻿/* =========================================================
+   APP.CSS – Estilos de todos os componentes e views
+   ========================================================= */
+
+/* -------- App layout -------- */
+#app { display: flex; flex-direction: column; min-height: 100vh; }
+main { flex: 1; }
+
+/* -------- Header -------- */
+.cabecalho {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: #111;
+  border-bottom: 1px solid var(--border);
+  padding: 1rem 0;
+}
+.cabecalho-interno {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.logo-cabecalho {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  color: var(--white);
+  font-weight: 700;
+}
+.logo-cabecalho span { color: var(--gold); }
+.navegacao {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+.navegacao a {
+  color: #ccc;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+.navegacao a:hover,
+.navegacao a.router-link-exact-active { color: var(--gold); }
+.hamburguer {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  padding: 4px;
+}
+.hamburguer span {
+  display: block;
+  width: 22px; height: 2px;
+  background: var(--gold);
+  border-radius: 2px;
+}
+.sobreposicao {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: 99;
+}
+@media (max-width: 768px) {
+  .hamburguer { display: flex; }
+  .navegacao {
+    position: fixed;
+    top: 0; right: -100%;
+    width: 230px; height: 100vh;
+    background: var(--bg2);
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.8rem;
+    transition: right 0.3s;
+    border-left: 1px solid var(--border);
+    z-index: 100;
+  }
+  .navegacao.aberto { right: 0; }
+}
+
+/* -------- Footer -------- */
+.rodape {
+  background: #0a0a0a;
+  border-top: 1px solid var(--border);
+  padding: 1.5rem 0;
+  text-align: center;
+}
+.logo-rodape {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  color: var(--white);
+  margin-bottom: 0.25rem;
+}
+.logo-rodape span { color: var(--gold); }
+.texto-opaco { color: var(--muted); font-size: 0.85rem; }
+
+/* -------- ServiceCard -------- */
+.card-servico {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.5rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.7rem;
+}
+.card-servico .icone-servico { font-size: 2.4rem; }
+.card-servico h3 { color: var(--white); font-size: 1.05rem; }
+.card-servico p { color: var(--muted); font-size: 0.88rem; flex: 1; }
+.card-servico .rodape-servico {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0.5rem 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.card-servico .rodape-servico strong { color: var(--gold); }
+.card-servico .rodape-servico span { color: var(--muted); font-size: 0.82rem; }
+.card-servico .botao { width: 100%; text-align: center; }
+
+/* -------- BarberCard -------- */
+.card-barbeiro {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.6rem;
+}
+.card-barbeiro .avatar-barbeiro {
+  width: 80px; height: 80px;
+  background: var(--gold);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #111;
+}
+.card-barbeiro h3 { color: var(--white); font-size: 1.1rem; }
+.card-barbeiro .cargo-barbeiro { color: var(--gold); font-size: 0.82rem; font-weight: 600; }
+.card-barbeiro p { color: var(--muted); font-size: 0.85rem; }
+
+/* -------- AppointmentForm -------- */
+.formulario-agendamento {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 2rem;
+}
+.linha-campos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+.grupo-campo {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.25rem;
+}
+.grupo-campo label {
+  color: #ccc;
+  font-size: 0.88rem;
+  font-weight: 500;
+  margin-bottom: 0.4rem;
+}
+.grupo-campo input,
+.grupo-campo select,
+.grupo-campo textarea {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--white);
+  padding: 0.7rem 0.9rem;
+  font-size: 0.9rem;
+  outline: none;
+  width: 100%;
+}
+.grupo-campo input:focus,
+.grupo-campo select:focus,
+.grupo-campo textarea:focus { border-color: var(--gold); }
+.grupo-campo input.campo-invalido,
+.grupo-campo select.campo-invalido,
+.grupo-campo textarea.campo-invalido { border-color: #e74c3c; }
+.grupo-campo select option { background: var(--bg); }
+.grupo-campo textarea { resize: vertical; min-height: 80px; }
+.erro-campo { color: #e74c3c; font-size: 0.78rem; margin-top: 0.3rem; }
+.formulario-agendamento .botao { width: 100%; padding: 0.9rem; font-size: 0.95rem; margin-top: 0.25rem; }
+.formulario-agendamento .botao:disabled { opacity: 0.6; cursor: not-allowed; transform: none !important; }
+@media (max-width: 580px) {
+  .linha-campos { grid-template-columns: 1fr; gap: 0; }
+  .formulario-agendamento { padding: 1.25rem; }
+}
+
+/* -------- ConfirmationModal -------- */
+.fundo-escuro {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.8);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+.janela {
+  background: var(--bg2);
+  border: 1px solid var(--gold);
+  border-radius: 10px;
+  padding: 2rem;
+  max-width: 440px;
+  width: 100%;
+  text-align: center;
+}
+.janela .icone-janela { font-size: 2.5rem; margin-bottom: 0.75rem; }
+.janela h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  color: var(--white);
+  margin-bottom: 0.5rem;
+}
+.janela .mensagem-janela { color: var(--muted); font-size: 0.9rem; margin-bottom: 1.25rem; }
+.janela .mensagem-janela strong { color: var(--gold); }
+.janela .detalhes-janela {
+  background: var(--bg);
+  border-radius: var(--radius);
+  padding: 1rem;
+  margin-bottom: 1rem;
+  text-align: left;
+}
+.janela .linha-detalhe {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.45rem 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.88rem;
+}
+.janela .linha-detalhe:last-child { border-bottom: none; }
+.janela .linha-detalhe span:first-child { color: var(--muted); }
+.janela .linha-detalhe span:last-child { color: var(--white); font-weight: 500; }
+.janela .nota-janela { color: var(--muted); font-size: 0.82rem; margin-bottom: 1.25rem; }
+.janela .botao { width: 100%; padding: 0.85rem; }
+
+/* -------- Page Hero (compartilhado) -------- */
+.destaque-pagina {
+  padding: 7rem 0 3rem;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg2);
+}
+.destaque-pagina h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem;
+  color: var(--white);
+}
+.destaque-pagina h1 span { color: var(--gold); }
+.destaque-pagina p { color: var(--muted); margin-top: 0.5rem; }
+@media (max-width: 520px) { .destaque-pagina h1 { font-size: 1.8rem; } }
+
+/* -------- HomeView -------- */
+.destaque {
+  min-height: 75vh;
+  display: flex;
+  align-items: center;
+  padding-top: 5rem;
+  background: var(--bg);
+}
+.destaque h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 3rem;
+  color: var(--white);
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+.destaque h1 span { color: var(--gold); }
+.destaque p { color: var(--muted); font-size: 1.05rem; max-width: 480px; margin-bottom: 2rem; }
+.acoes-destaque { display: flex; gap: 1rem; flex-wrap: wrap; }
+.grade-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+@media (max-width: 768px) {
+  .grade-3 { grid-template-columns: 1fr; }
+  .acoes-destaque { flex-direction: column; }
+}
+
+@media (max-width: 768px) { .grade-3 { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 520px) { .grade-3 { grid-template-columns: 1fr; } }
+
+/* -------- BarbersView -------- */
+.grade-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; margin: 2rem 0; }
+@media (max-width: 900px) { .grade-4 { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 520px) { .grade-4 { grid-template-columns: 1fr; } }
+
+
+
+/* -------- ContactView -------- */
+.layout-contato {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 3rem;
+  align-items: start;
+}
+.painel-contato h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  color: var(--white);
+  margin-bottom: 1rem;
+}
+.painel-contato h2 span { color: var(--gold); }
+.intro-contato { color: var(--muted); line-height: 1.75; margin-bottom: 2rem; font-size: 0.95rem; }
+.lista-contato { display: flex; flex-direction: column; gap: 0.85rem; margin-bottom: 1.5rem; }
+.card-contato {
+  display: flex; align-items: center; gap: 1rem;
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 1rem 1.25rem;
+}
+.card-contato .icone-card { font-size: 1.5rem; }
+.card-contato h4 { color: var(--gold); font-size: 0.78rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.2rem; }
+.card-contato p { color: var(--muted); font-size: 0.88rem; }
+.formulario-contato {
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: 10px; padding: 2rem;
+}
+.formulario-contato h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem; color: var(--white); margin-bottom: 1.5rem;
+}
+.formulario-contato h3 span { color: var(--gold); }
+/* O formulario-contato reutiliza .grupo-campo do AppointmentForm */
+.formulario-contato .grupo-campo label { color: #ccc; font-size: 0.88rem; font-weight: 500; margin-bottom: 0.4rem; }
+.formulario-contato .grupo-campo input,
+.formulario-contato .grupo-campo textarea {
+  background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius);
+  color: var(--white); padding: 0.7rem 0.9rem; font-size: 0.9rem; outline: none;
+  transition: border-color 0.2s; width: 100%;
+}
+.formulario-contato .grupo-campo input:focus,
+.formulario-contato .grupo-campo textarea:focus { border-color: var(--gold); }
+.formulario-contato .grupo-campo input.campo-invalido,
+.formulario-contato .grupo-campo textarea.campo-invalido { border-color: #e74c3c; }
+.formulario-contato .grupo-campo textarea { resize: vertical; min-height: 100px; }
+.formulario-contato .botao { width: 100%; padding: 0.9rem; margin-top: 0.25rem; }
+.aviso-sucesso {
+  margin-top: 1rem;
+  background: rgba(39,174,96,0.1); border: 1px solid rgba(39,174,96,0.3);
+  color: #2ecc71; padding: 1rem; border-radius: var(--radius); text-align: center; font-size: 0.9rem;
+}
+@media (max-width: 900px) { .layout-contato { grid-template-columns: 1fr; } }
+@media (max-width: 600px) { .formulario-contato { padding: 1.25rem; } }
