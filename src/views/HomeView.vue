@@ -19,33 +19,13 @@
         <p class="subtitulo-secao">Os mais pedidos pelos nossos clientes</p>
 
         <div class="grade-3">
-          <div class="card-servico">
-            <div class="icone-servico">✂️</div>
-            <h3>Corte Masculino</h3>
-            <p>Corte personalizado com tesoura ou máquina.</p>
+          <div v-for="service in services" :key="service.id" class="card-servico">
+            <div class="icone-servico">{{ service.icon }}</div>
+            <h3>{{ service.name }}</h3>
+            <p>{{ service.description }}</p>
             <div class="rodape-servico">
-              <strong>R$ 45,00</strong>
-              <span>⏱ 40 min</span>
-            </div>
-            <RouterLink to="/agendamento" class="botao botao-contorno">Agendar</RouterLink>
-          </div>
-          <div class="card-servico">
-            <div class="icone-servico">🪒</div>
-            <h3>Barba</h3>
-            <p>Aparar e modelar com produtos premium.</p>
-            <div class="rodape-servico">
-              <strong>R$ 35,00</strong>
-              <span>⏱ 30 min</span>
-            </div>
-            <RouterLink to="/agendamento" class="botao botao-contorno">Agendar</RouterLink>
-          </div>
-          <div class="card-servico">
-            <div class="icone-servico">💈</div>
-            <h3>Corte + Barba</h3>
-            <p>O combo completo para sair transformado.</p>
-            <div class="rodape-servico">
-              <strong>R$ 70,00</strong>
-              <span>⏱ 60 min</span>
+              <strong>R$ {{ service.price }}</strong>
+              <span>⏱ {{ service.duration }}</span>
             </div>
             <RouterLink to="/agendamento" class="botao botao-contorno">Agendar</RouterLink>
           </div>
@@ -60,5 +40,10 @@
 </template>
 
 <script setup>
+const services = [
+  { id: 1, icon: '✂️', name: 'Corte Masculino', description: 'Corte personalizado com tesoura ou máquina.', price: '45,00', duration: '40 min' },
+  { id: 2, icon: '🪒', name: 'Barba',           description: 'Aparar e modelar com produtos premium.',      price: '35,00', duration: '30 min' },
+  { id: 3, icon: '💈', name: 'Corte + Barba',   description: 'O combo completo para sair transformado.',   price: '70,00', duration: '60 min' },
+]
 </script>
 
