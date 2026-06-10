@@ -10,48 +10,7 @@
     <section class="secao">
       <div class="envolvente">
         <div class="grade-3">
-          <div class="card-servico">
-            <div class="icone-servico">✂️</div>
-            <h3>Corte Masculino</h3>
-            <p>Corte personalizado com tesoura ou máquina.</p>
-            <div class="rodape-servico"><strong>R$ 45,00</strong><span>⏱ 40 min</span></div>
-            <RouterLink to="/agendamento" class="botao botao-contorno">Agendar</RouterLink>
-          </div>
-          <div class="card-servico">
-            <div class="icone-servico">🪒</div>
-            <h3>Barba</h3>
-            <p>Aparar e modelar com produtos premium.</p>
-            <div class="rodape-servico"><strong>R$ 35,00</strong><span>⏱ 30 min</span></div>
-            <RouterLink to="/agendamento" class="botao botao-contorno">Agendar</RouterLink>
-          </div>
-          <div class="card-servico">
-            <div class="icone-servico">💈</div>
-            <h3>Corte + Barba</h3>
-            <p>O combo completo para sair transformado.</p>
-            <div class="rodape-servico"><strong>R$ 70,00</strong><span>⏱ 60 min</span></div>
-            <RouterLink to="/agendamento" class="botao botao-contorno">Agendar</RouterLink>
-          </div>
-          <div class="card-servico">
-            <div class="icone-servico">👁️</div>
-            <h3>Sobrancelha</h3>
-            <p>Design e alinhamento de sobrancelha.</p>
-            <div class="rodape-servico"><strong>R$ 20,00</strong><span>⏱ 15 min</span></div>
-            <RouterLink to="/agendamento" class="botao botao-contorno">Agendar</RouterLink>
-          </div>
-          <div class="card-servico">
-            <div class="icone-servico">🎨</div>
-            <h3>Pigmentação</h3>
-            <p>Pigmentação capilar para um visual jovem.</p>
-            <div class="rodape-servico"><strong>R$ 80,00</strong><span>⏱ 60 min</span></div>
-            <RouterLink to="/agendamento" class="botao botao-contorno">Agendar</RouterLink>
-          </div>
-          <div class="card-servico">
-            <div class="icone-servico">💧</div>
-            <h3>Hidratação</h3>
-            <p>Tratamento hidratante profundo.</p>
-            <div class="rodape-servico"><strong>R$ 55,00</strong><span>⏱ 45 min</span></div>
-            <RouterLink to="/agendamento" class="botao botao-contorno">Agendar</RouterLink>
-          </div>
+          <ServiceCard v-for="service in servicos" :key="service.name" :service="service" />
         </div>
       </div>
     </section>
@@ -59,4 +18,14 @@
 </template>
 
 <script setup>
+import ServiceCard from '@/components/ServiceCard.vue'
+
+const servicos = [
+  { icon: '✂️', name: 'Corte Masculino', description: 'Corte personalizado com tesoura ou máquina.', price: '45,00', duration: '40 min' },
+  { icon: '🪒', name: 'Barba', description: 'Aparar e modelar com produtos premium.', price: '35,00', duration: '30 min' },
+  { icon: '💈', name: 'Corte + Barba', description: 'O combo completo para sair transformado.', price: '70,00', duration: '60 min' },
+  { icon: '👁️', name: 'Sobrancelha', description: 'Design e alinhamento de sobrancelha.', price: '20,00', duration: '15 min' },
+  { icon: '🎨', name: 'Pigmentação', description: 'Pigmentação capilar para um visual jovem.', price: '80,00', duration: '60 min' },
+  { icon: '💧', name: 'Hidratação', description: 'Tratamento hidratante profundo.', price: '55,00', duration: '45 min' },
+]
 </script>
