@@ -19,16 +19,7 @@
         <p class="subtitulo-secao">Os mais pedidos pelos nossos clientes</p>
 
         <div class="grade-3">
-          <div v-for="service in services" :key="service.id" class="card-servico">
-            <div class="icone-servico">{{ service.icon }}</div>
-            <h3>{{ service.name }}</h3>
-            <p>{{ service.description }}</p>
-            <div class="rodape-servico">
-              <strong>R$ {{ service.price }}</strong>
-              <span>⏱ {{ service.duration }}</span>
-            </div>
-            <RouterLink to="/agendamento" class="botao botao-contorno">Agendar</RouterLink>
-          </div>
+          <ServiceCard v-for="s in services" :key="s.id" :service="s" />
         </div>
 
         <div style="text-align:center; margin-top: 2rem;">
@@ -40,6 +31,8 @@
 </template>
 
 <script setup>
+import ServiceCard from '@/components/ServiceCard.vue'
+
 const services = [
   { id: 1, icon: '✂️', name: 'Corte Masculino', description: 'Corte personalizado com tesoura ou máquina.', price: '45,00', duration: '40 min' },
   { id: 2, icon: '🪒', name: 'Barba',           description: 'Aparar e modelar com produtos premium.',      price: '35,00', duration: '30 min' },

@@ -11,30 +11,7 @@
         <h2 class="titulo-secao">Barbeiros <span>Especialistas</span></h2>
         <p class="subtitulo-secao">Cada profissional treinado e apaixonado pela arte da barbearia</p>
         <div class="grade-4">
-          <div class="card-barbeiro">
-            <div class="avatar-barbeiro">CS</div>
-            <h3>Carlos Silva</h3>
-            <span class="cargo-barbeiro">Master Barber</span>
-            <p>Mais de 10 anos em cortes clássicos e modernos.</p>
-          </div>
-          <div class="card-barbeiro">
-            <div class="avatar-barbeiro">JM</div>
-            <h3>João Mendes</h3>
-            <span class="cargo-barbeiro">Barber Senior</span>
-            <p>Especialista em degradês modernos e estilos urbanos.</p>
-          </div>
-          <div class="card-barbeiro">
-            <div class="avatar-barbeiro">RC</div>
-            <h3>Rafael Costa</h3>
-            <span class="cargo-barbeiro">Barber</span>
-            <p>Apaixonado por tendências e técnicas contemporâneas.</p>
-          </div>
-          <div class="card-barbeiro">
-            <div class="avatar-barbeiro">LB</div>
-            <h3>Lucas Barbosa</h3>
-            <span class="cargo-barbeiro">Barber Junior</span>
-            <p>Talento jovem com foco em atendimento personalizado.</p>
-          </div>
+          <BarberCard v-for="barber in barbers" :key="barber.initials" :barber="barber" />
         </div>
       </div>
     </section>
@@ -42,4 +19,12 @@
 </template>
 
 <script setup>
+import BarberCard from '@/components/BarberCard.vue'
+
+const barbers = [
+  { initials: 'LB', name: 'Leo Burei', role: 'Master Barber', bio: 'Mais de 10 anos em cortes clássicos e modernos.' },
+  { initials: 'LM', name: 'Luis Molon', role: 'Barber Senior', bio: 'Especialista em degradês modernos e estilos urbanos.' },
+  { initials: 'ADB', name: 'Alex David Becker', role: 'Barber', bio: 'Apaixonado por tendências e técnicas contemporâneas.' },
+  { initials: 'DM', name: 'Dionatan Markiu', role: 'Barber Junior', bio: 'Talento jovem com foco em atendimento personalizado.' },
+]
 </script>
