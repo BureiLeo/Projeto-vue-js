@@ -3,7 +3,6 @@
     <form @submit.prevent="handleSubmit" novalidate>
 
       <div class="linha-campos">
-        <!-- Nome -->
         <div class="grupo-campo">
           <label for="name">Nome Completo *</label>
           <input
@@ -17,14 +16,14 @@
           <span v-if="errors.name" class="erro-campo">{{ errors.name }}</span>
         </div>
 
-        <!-- Telefone -->
         <div class="grupo-campo">
           <label for="phone">Telefone / WhatsApp *</label>
           <input
             id="phone"
             v-model="form.phone"
             type="tel"
-            placeholder="(11) 99999-9999"
+            maxlength="11"
+            placeholder="11999999999"
             :class="{ 'campo-invalido': errors.phone }"
             autocomplete="tel"
           />
@@ -33,14 +32,9 @@
       </div>
 
       <div class="linha-campos">
-        <!-- Serviço – usa v-for para popular o select -->
         <div class="grupo-campo">
           <label for="service">Serviço Desejado *</label>
-          <select
-            id="service"
-            v-model="form.service"
-            :class="{ 'campo-invalido': errors.service }"
-          >
+          <select id="service" v-model="form.service" :class="{ 'campo-invalido': errors.service }">
             <option value="" disabled>Selecione um serviço</option>
             <option v-for="s in services" :key="s.id" :value="s.name">
               {{ s.name }} – R$ {{ s.price }}
@@ -49,14 +43,9 @@
           <span v-if="errors.service" class="erro-campo">{{ errors.service }}</span>
         </div>
 
-        <!-- Barbeiro – usa v-for para popular o select -->
         <div class="grupo-campo">
           <label for="barber">Barbeiro *</label>
-          <select
-            id="barber"
-            v-model="form.barber"
-            :class="{ 'campo-invalido': errors.barber }"
-          >
+          <select id="barber" v-model="form.barber" :class="{ 'campo-invalido': errors.barber }">
             <option value="" disabled>Selecione um barbeiro</option>
             <option v-for="b in barbers" :key="b.id" :value="b.name">
               {{ b.name }}
@@ -67,7 +56,6 @@
       </div>
 
       <div class="linha-campos">
-        <!-- Data -->
         <div class="grupo-campo">
           <label for="date">Data *</label>
           <input
@@ -80,14 +68,9 @@
           <span v-if="errors.date" class="erro-campo">{{ errors.date }}</span>
         </div>
 
-        <!-- Horário – usa v-for para popular o select -->
         <div class="grupo-campo">
           <label for="time">Horário *</label>
-          <select
-            id="time"
-            v-model="form.time"
-            :class="{ 'campo-invalido': errors.time }"
-          >
+          <select id="time" v-model="form.time" :class="{ 'campo-invalido': errors.time }">
             <option value="" disabled>Selecione um horário</option>
             <option v-for="slot in timeSlots" :key="slot" :value="slot">
               {{ slot }}
@@ -97,7 +80,6 @@
         </div>
       </div>
 
-      <!-- Observações (campo opcional) -->
       <div class="grupo-campo">
         <label for="notes">Observações (opcional)</label>
         <textarea
@@ -117,10 +99,11 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 
 const emit = defineEmits(['success'])
 
+// Guarda os dados digitados no formulário
 const form = ref({
   name: '',
   phone: '',
@@ -131,6 +114,7 @@ const form = ref({
   notes: '',
 })
 
+// Armazena mensagens de erro dos campos
 const errors = ref({})
 const isSubmitting = ref(false)
 
@@ -158,23 +142,49 @@ const timeSlots = [
 
 const minDate = computed(() => new Date().toISOString().split('T')[0])
 
-/* Valida todos os campos obrigatórios */
+// Limpa os erros quando o usuário altera algum campo
+watch(form, () => {
+  errors.value = {}
+}, { deep: true })
+
 function validate() {
   const e = {}
-  if (!form.value.name.trim()) e.name = 'Nome é obrigatório.'
-  if (!form.value.phone.trim()) e.phone = 'Telefone é obrigatório.'
-  if (!form.value.service) e.service = 'Selecione um serviço.'
-  if (!form.value.barber) e.barber = 'Selecione um barbeiro.'
-  if (!form.value.date) e.date = 'Selecione uma data.'
-  if (!form.value.time) e.time = 'Selecione um horário.'
+
+  if (!form.value.name.trim()) {
+    e.name = 'Nome é obrigatório.'
+  }
+
+  if (!form.value.phone.trim()) {
+    e.phone = 'Telefone é obrigatório.'
+  } else if (form.value.phone.length < 11) {
+    e.phone = 'Telefone inválido. Digite DDD + número.'
+  }
+
+  if (!form.value.service) {
+    e.service = 'Selecione um serviço.'
+  }
+
+  if (!form.value.barber) {
+    e.barber = 'Selecione um barbeiro.'
+  }
+
+  if (!form.value.date) {
+    e.date = 'Selecione uma data.'
+  }
+
+  if (!form.value.time) {
+    e.time = 'Selecione um horário.'
+  }
+
   errors.value = e
   return Object.keys(e).length === 0
 }
 
 function handleSubmit() {
   if (!validate()) return
+
   isSubmitting.value = true
-  // Simula chamada assíncrona de 1 segundo
+
   setTimeout(() => {
     isSubmitting.value = false
     emit('success', { ...form.value })
@@ -183,8 +193,16 @@ function handleSubmit() {
 }
 
 function resetForm() {
-  form.value = { name: '', phone: '', service: '', barber: '', date: '', time: '', notes: '' }
+  form.value = {
+    name: '',
+    phone: '',
+    service: '',
+    barber: '',
+    date: '',
+    time: '',
+    notes: '',
+  }
+
   errors.value = {}
 }
 </script>
-
