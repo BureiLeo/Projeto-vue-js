@@ -20,11 +20,15 @@
 
 <script setup>
 import BarberCard from '@/components/BarberCard.vue'
+import leoPhoto from '@/assets/leo.jpeg'
+import luisPhoto from '@/assets/luis.jpeg'
+import alexPhoto from '@/assets/alex.jpeg'
+import dionatanPhoto from '@/assets/dionatan.jpeg'
 
 const barbers = [
-  { initials: 'LB', name: 'Leo Burei', role: 'Master Barber', bio: 'Mais de 10 anos em cortes clássicos e modernos.' },
-  { initials: 'LM', name: 'Luis Molon', role: 'Barber Senior', bio: 'Especialista em degradês modernos e estilos urbanos.' },
-  { initials: 'ADB', name: 'Alex David Becker', role: 'Barber', bio: 'Apaixonado por tendências e técnicas contemporâneas.' },
-  { initials: 'DM', name: 'Dionatan Markiu', role: 'Barber Junior', bio: 'Talento jovem com foco em atendimento personalizado.' },
+  { initials: 'LB', name: 'Leo Burei', role: 'Master Barber', bio: 'Mais de 10 anos em cortes clássicos e modernos.', photo: leoPhoto },
+  { initials: 'LM', name: 'Luis Molon', role: 'Barber Senior', bio: 'Especialista em degradês modernos e estilos urbanos.', photo: luisPhoto },
+  { initials: 'ADB', name: 'Alex David Becker', role: 'Barber', bio: 'Apaixonado por tendências e técnicas contemporâneas.', photo: alexPhoto },
+  { initials: 'DM', name: 'Dionatan Markiu', role: 'Barber Junior', bio: 'Talento jovem com foco em atendimento personalizado.', photo: dionatanPhoto },
 ]
 </script>

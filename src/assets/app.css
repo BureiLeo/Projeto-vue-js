@@ -132,9 +132,10 @@ main { flex: 1; }
   gap: 0.6rem;
 }
 .card-barbeiro .avatar-barbeiro {
-  width: 80px; height: 80px;
+  width: 110px; height: 110px;
   background: var(--gold);
   border-radius: 50%;
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -142,6 +143,12 @@ main { flex: 1; }
   font-size: 1.8rem;
   font-weight: 700;
   color: #111;
+}
+.card-barbeiro .avatar-barbeiro img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 .card-barbeiro h3 { color: var(--white); font-size: 1.1rem; }
 .card-barbeiro .cargo-barbeiro { color: var(--gold); font-size: 0.82rem; font-weight: 600; }

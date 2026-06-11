@@ -9,64 +9,32 @@
 
     <section class="secao">
       <div class="envolvente">
-        <form class="formulario-agendamento">
-          <div class="linha-campos">
-            <div class="grupo-campo">
-              <label>Nome Completo</label>
-              <input type="text" placeholder="Seu nome completo" />
-            </div>
-            <div class="grupo-campo">
-              <label>Telefone</label>
-              <input type="tel" placeholder="(11) 99999-9999" />
-            </div>
-          </div>
-          <div class="linha-campos">
-            <div class="grupo-campo">
-              <label>Serviço</label>
-              <select>
-                <option>Corte Masculino</option>
-                <option>Barba</option>
-                <option>Corte + Barba</option>
-              </select>
-            </div>
-            <div class="grupo-campo">
-              <label>Barbeiro</label>
-              <select>
-                <option>Carlos Silva</option>
-                <option>João Mendes</option>
-                <option>Rafael Costa</option>
-                <option>Lucas Barbosa</option>
-              </select>
-            </div>
-          </div>
-          <div class="linha-campos">
-            <div class="grupo-campo">
-              <label>Data</label>
-              <input type="date" />
-            </div>
-            <div class="grupo-campo">
-              <label>Horário</label>
-              <select>
-                <option>09:00</option>
-                <option>10:00</option>
-                <option>11:00</option>
-                <option>14:00</option>
-                <option>15:00</option>
-                <option>16:00</option>
-              </select>
-            </div>
-          </div>
-          <div class="grupo-campo">
-            <label>Observações</label>
-            <textarea rows="3" placeholder="Alguma observação especial?"></textarea>
-          </div>
-          <button type="submit" class="botao botao-primario">Confirmar Agendamento</button>
-        </form>
+        <AppointmentForm @success="onSuccess" />
+        <p v-if="confirmacao" class="mensagem-sucesso">✅ Agendamento confirmado! Entraremos em contato.</p>
       </div>
     </section>
   </div>
 </template>
 
 <script setup>
+import { ref } from 'vue'
+import AppointmentForm from '@/components/AppointmentForm.vue'
+
+const confirmacao = ref(false)
+
+function onSuccess() {
+  confirmacao.value = true
+  setTimeout(() => { confirmacao.value = false }, 5000)
+}
 </script>
+
+<style scoped>
+.mensagem-sucesso {
+  text-align: center;
+  margin-top: 1.5rem;
+  color: #4caf50;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+</style>
 

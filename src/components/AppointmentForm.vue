@@ -64,6 +64,7 @@
             type="date"
             :min="minDate"
             :class="{ 'campo-invalido': errors.date }"
+            @click="$event.target.showPicker()"
           />
           <span v-if="errors.date" class="erro-campo">{{ errors.date }}</span>
         </div>
@@ -128,10 +129,10 @@ const services = [
 ]
 
 const barbers = [
-  { id: 1, name: 'Carlos Silva' },
-  { id: 2, name: 'João Mendes' },
-  { id: 3, name: 'Rafael Costa' },
-  { id: 4, name: 'Lucas Barbosa' },
+  { id: 1, name: 'Leo Burei' },
+  { id: 2, name: 'Luis Molon' },
+  { id: 3, name: 'Alex David Becker' },
+  { id: 4, name: 'Dionatan Markiu' },
 ]
 
 const timeSlots = [
@@ -152,6 +153,8 @@ function validate() {
 
   if (!form.value.name.trim()) {
     e.name = 'Nome é obrigatório.'
+  } else if (!/^[A-Za-zÀ-ÖØ-öø-ÿ\s]+$/.test(form.value.name.trim())) {
+    e.name = 'Nome deve conter apenas letras.'
   }
 
   if (!form.value.phone.trim()) {
